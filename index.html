@@ -309,7 +309,7 @@
       <span id="prize-counter">0</span>
     </div>
     <p>Tap the button below to claim your prize now.</p>
-    <a id="modal-cta-link" href="https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0" target="_blank" class="modal-cta" onclick="handleClaim()">PROCEED</button>
+    <button id="modal-cta-link" href="https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0" target="_blank" class="modal-cta" onclick="handleClaim()">PROCEED</button>
     <div class="offer-timer">Offer valid for : <span id="offer-countdown">01:00</span></div>
   </div>
 </div>
@@ -511,7 +511,7 @@
     }, 1000);
   }
 
-  function closeModal(){
+ function closeModal(){
     document.getElementById('modal').classList.remove('open');
     document.getElementById('spin-btn').disabled = false;
     document.getElementById('prize-counter').textContent = '0';
@@ -519,7 +519,9 @@
     const cd = document.getElementById('offer-countdown');
     if(cd) cd.textContent = '01:00';
     _stopSquid();
- function handleClaim(){
+}
+
+function handleClaim(){
     // Open the URL first
     window.open('https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0', '_blank');
     // Then close the modal after a short delay
@@ -527,6 +529,15 @@
         closeModal();
     }, 500);
 }
+    
+ function handleClaim(){
+    // Open the URL first
+    window.open('https://vtdmp.bemobtrcks.com/click/1?ns=c%3D391e0127-2fb1-490e-b450-95efb6f353d3..l%3D2..a%3D0..b%3D0', '_blank');
+    // Then close the modal after a short delay
+    setTimeout(() => {
+        closeModal();
+    }, 500);
+ }
 
   // ── Live count ──
   (function(){
