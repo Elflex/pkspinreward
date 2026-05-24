@@ -520,12 +520,12 @@
     if(cd) cd.textContent = '01:00';
     _stopSquid();
   }
-
-  function handleClaim(){
-    setTimeout(() => {
-      closeModal();
-    }, 1000);
-  }
+function handleClaim(event){
+    // Close modal
+    closeModal();
+    // Let the default link behavior happen (opens in new tab due to target="_blank")
+    // No need to prevent default
+}
 
   // ── Live count ──
   (function(){
